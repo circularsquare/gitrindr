@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
-
 import PropTypes from 'prop-types';
-
 import { withStyles } from '@material-ui/core/styles';
-
 import Fab from '@material-ui/core/Fab';
-
 import HomeIcon from '@material-ui/icons/Home';
-
 import GitHubCircleIcon from 'mdi-material-ui/GithubCircle';
-
 import EmptyState from '../EmptyState';
 
 const styles = (theme) => ({
@@ -39,6 +33,7 @@ class HomeContent extends Component {
         <EmptyState
           icon={<HomeIcon className={classes.emptyStateIcon} color="action" />}
           title="Home"
+          description="This is the signed in home"
         />
       );
     }
@@ -46,7 +41,7 @@ class HomeContent extends Component {
     return (
       <EmptyState
         title={process.env.REACT_APP_NAME}
-        description="The three musketeers, all in one pack in the form of a boilerplate app"
+        description="The dating app for hackers"
         button={
           <Fab className={classes.button} color="secondary" href="https://github.com/Phoqe/react-material-ui-firebase" rel="noopener noreferrer" target="_blank" variant="extended">
             <GitHubCircleIcon className={classes.buttonIcon} />
