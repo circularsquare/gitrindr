@@ -26,7 +26,7 @@ class Chat extends Component {
   }
 
   componentWillMount() {
-      this.initChat(this.props.user)
+      //this.initChat(this.props.user)
   }
 
   render() {
