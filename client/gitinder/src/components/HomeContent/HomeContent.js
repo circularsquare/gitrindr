@@ -5,6 +5,7 @@ import Fab from '@material-ui/core/Fab';
 import HomeIcon from '@material-ui/icons/Home';
 import GitHubCircleIcon from 'mdi-material-ui/GithubCircle';
 import EmptyState from '../EmptyState';
+import Chat from '../Chat';
 
 const styles = (theme) => ({
   emptyStateIcon: {
@@ -22,6 +23,7 @@ const styles = (theme) => ({
 
 class HomeContent extends Component {
   render() {
+    console.log(this.props)
     // Styling
     const { classes } = this.props;
 
@@ -30,11 +32,14 @@ class HomeContent extends Component {
 
     if (signedIn) {
       return (
+        <div>
         <EmptyState
           icon={<HomeIcon className={classes.emptyStateIcon} color="action" />}
           title="Home"
           description="This is the signed in home"
         />
+        <Chat> bruh </Chat>
+        </div>
       );
     }
 
