@@ -23,8 +23,9 @@ authentication.signUp = (fields) => {
     const username = fields.username;
     const emailAddress = fields.emailAddress;
     const password = fields.password;
+    const githubUsername = fields.githubUsername;
 
-    if (!firstName || !lastName || !username || !emailAddress || !password) {
+    if (!firstName || !lastName || !username || !emailAddress || !password || !githubUsername) {
       reject();
 
       return;

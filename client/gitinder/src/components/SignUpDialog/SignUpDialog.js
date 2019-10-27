@@ -50,6 +50,7 @@ const initialState = {
   emailAddressConfirmation: '',
   password: '',
   passwordConfirmation: '',
+  githubUsername: '',
 
   errors: null
 };
@@ -69,7 +70,9 @@ class SignUpDialog extends Component {
       emailAddress,
       emailAddressConfirmation,
       password,
-      passwordConfirmation
+      passwordConfirmation,
+      githubUsername
+
     } = this.state;
 
     const errors = validate({
@@ -79,7 +82,8 @@ class SignUpDialog extends Component {
       emailAddress: emailAddress,
       emailAddressConfirmation: emailAddressConfirmation,
       password: password,
-      passwordConfirmation: passwordConfirmation
+      passwordConfirmation: passwordConfirmation,
+      githubUsername: githubUsername
     }, {
       firstName: constraints.firstName,
       lastName: constraints.lastName,
@@ -87,7 +91,8 @@ class SignUpDialog extends Component {
       emailAddress: constraints.emailAddress,
       emailAddressConfirmation: constraints.emailAddressConfirmation,
       password: constraints.password,
-      passwordConfirmation: constraints.passwordConfirmation
+      passwordConfirmation: constraints.passwordConfirmation,
+      githubUsername: constraints.githubUsername
     });
 
     if (errors) {
@@ -105,7 +110,8 @@ class SignUpDialog extends Component {
           lastName: lastName,
           username: username,
           emailAddress: emailAddress,
-          password: password
+          password: password,
+          githubUsername: githubUsername
         }).then((value) => {
           this.props.dialogProps.onClose();
         }).catch((reason) => {
@@ -181,7 +187,8 @@ class SignUpDialog extends Component {
       emailAddress,
       emailAddressConfirmation,
       password,
-      passwordConfirmation
+      passwordConfirmation,
+      githubUsername,
     } = this.state;
 
     if (!firstName ||
@@ -190,7 +197,8 @@ class SignUpDialog extends Component {
       !emailAddress ||
       !emailAddressConfirmation ||
       !password ||
-      !passwordConfirmation) {
+      !passwordConfirmation ||
+      !githubUsername) {
       return;
     }
 
@@ -265,6 +273,14 @@ class SignUpDialog extends Component {
     });
   };
 
+  handleGithubUsernameChange = (event) => {
+    const githubUsername = event.target.value;
+
+    this.setState({
+        githubUsername: githubUsername
+    });
+  };
+
   render() {
     // Styling
     const { classes } = this.props;
@@ -282,6 +298,7 @@ class SignUpDialog extends Component {
       emailAddressConfirmation,
       password,
       passwordConfirmation,
+      githubUsername,
 
       errors
     } = this.state;
@@ -440,6 +457,25 @@ class SignUpDialog extends Component {
                       onChange={this.handlePasswordConfirmationChange}
                     />
                   </Grid>
+                  <Grid container spacing={4}>
+                    <Grid item xs>
+                      <TextField
+                        autoComplete="githubUsername"
+                        disabled={performingAction}
+                        error={!!(errors && errors.githubUsername)}
+                        fullWidth
+                        helperText={(errors && errors.githubUsername) ? errors.githubUsername[0] : ''}
+                        label="githubUsername"
+                        placeholder="Bruh"
+                        required
+                        type="text"
+                        value={githubUsername}
+                        variant="outlined"
+
+                        onChange={this.handleGithubUsernameChange}
+                      />
+                    </Grid>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
@@ -581,6 +617,25 @@ class SignUpDialog extends Component {
                   onChange={this.handlePasswordConfirmationChange}
                 />
               </Grid>
+
+              <Grid item xs>
+                <TextField
+                  autoComplete="github-username"
+                  disabled={performingAction}
+                  error={!!(errors && errors.githubUsername)}
+                  fullWidth
+                  helperText={(errors && errors.githubUsername) ? errors.githubUsername[0] : ''}
+                  label="Github Username"
+                  placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                  required
+                  type="githubUsername"
+                  value={githubUsername}
+                  variant="outlined"
+
+                  onChange={this.handleGithubUsernameChange}
+                />
+              </Grid>
+
             </Grid>
           </DialogContent>
         </Hidden>
@@ -598,6 +653,7 @@ class SignUpDialog extends Component {
               !emailAddressConfirmation ||
               !password ||
               !passwordConfirmation ||
+              !githubUsername ||
               performingAction
             }
             variant="contained"
