@@ -82,6 +82,12 @@ const constraints = {
 
     type: 'string'
   },
+  githubUsername: {
+    presence:{
+      allowEmpty:false
+    },
+    type: 'string'
+  }
 };
 
 export default constraints;

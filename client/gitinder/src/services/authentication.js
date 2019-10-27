@@ -12,6 +12,7 @@ const authentication = {};
 
 authentication.signUp = (fields) => {
   return new Promise((resolve, reject) => {
+    console.log('bruh3')
     if (!fields) {
       reject();
 
@@ -24,7 +25,7 @@ authentication.signUp = (fields) => {
     const emailAddress = fields.emailAddress;
     const password = fields.password;
     const githubUsername = fields.githubUsername;
-
+    console.log('bruh4')
     if (!firstName || !lastName || !username || !emailAddress || !password || !githubUsername) {
       reject();
 
@@ -35,7 +36,8 @@ authentication.signUp = (fields) => {
 
     if (currentUser) {
       reject();
-
+      auth.signOut();
+      console.log('bruh5')
       return;
     }
 
@@ -44,30 +46,25 @@ authentication.signUp = (fields) => {
 
       if (!user) {
         reject();
-
         return;
       }
 
       const uid = user.uid;
-
       if (!uid) {
         reject();
-
         return;
       }
 
       const reference = firestore.collection('users').doc(uid);
-
       if (!reference) {
         reject();
-
         return;
       }
-
       reference.set({
         firstName: firstName,
         lastName: lastName,
-        username: username
+        username: username,
+        githubUsername: githubUsername,
       }).then((value) => {
         analytics.logEvent('sign_up', {
           method: 'password'
@@ -75,9 +72,11 @@ authentication.signUp = (fields) => {
 
         resolve(value);
       }).catch((reason) => {
+        console.log('bruh1')
         reject(reason);
       });
     }).catch((reason) => {
+      console.log('bruh2')
       reject(reason);
     });
   });

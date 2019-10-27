@@ -115,6 +115,7 @@ class SignUpDialog extends Component {
         }).then((value) => {
           this.props.dialogProps.onClose();
         }).catch((reason) => {
+          console.log('bruh1')
           const code = reason.code;
           const message = reason.message;
 
